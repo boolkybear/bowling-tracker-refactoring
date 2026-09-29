@@ -7,6 +7,9 @@
 
 import UIKit
 
+var friends: [String] = []
+var game = BowlingGame()
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
