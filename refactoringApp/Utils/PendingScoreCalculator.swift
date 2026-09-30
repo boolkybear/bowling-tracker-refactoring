@@ -2,8 +2,6 @@
 //  PendingScoreCalculator.swift
 //  refactoringApp
 //
-//  Created by Jose Servet Font on 29/09/2026.
-//
 
 class PendingScoreCalculator {
     static func calculateScore(friend: Int) -> Int {

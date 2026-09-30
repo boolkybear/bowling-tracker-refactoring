@@ -2,8 +2,6 @@
 //  String+localization.swift
 //  refactoringApp
 //
-//  Created by Jose Servet Font on 29/09/2026.
-//
 
 import Foundation
 
@@ -16,10 +14,10 @@ extension String {
         }
 
         let updatedResource = LocalizedStringResource(
-            resource.defaultValue, // Mantiene la clave/valor interpolado nativo
+            resource.defaultValue,
             table: resource.table,
             locale: Locale(identifier: languageCode),
-            bundle: .atURL(bundle.bundleURL), // Forzamos el sub-bundle
+            bundle: .atURL(bundle.bundleURL),
             comment: nil
         )
 

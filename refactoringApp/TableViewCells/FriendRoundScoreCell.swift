@@ -1,15 +1,14 @@
 //
-//  FriendCell.swift
+//  FriendRoundScoreCell.swift
 //  refactoringApp
-//
-//  Created by Jose Servet Font on 28/09/2026.
 //
 
 import UIKit
 
-class FriendCell: UITableViewCell {
+class FriendRoundScoreCell: UITableViewCell {
 
-    @IBOutlet var friendLabel: UILabel!
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var scoreLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -2,8 +2,6 @@
 //  AppDelegate.swift
 //  refactoringApp
 //
-//  Created by Jose Servet Font on 28/09/2026.
-//
 
 import UIKit
 
