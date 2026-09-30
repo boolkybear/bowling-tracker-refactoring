@@ -74,14 +74,18 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Add friends" id="8pR-3D-0dY">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ycv-An-nlC">
-                            <connections>
-                                <action selector="addFriend" destination="jsh-oH-C0H" id="9GS-DD-FDn"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="ycv-An-nlC">
+                                <connections>
+                                    <action selector="addFriend" destination="jsh-oH-C0H" id="9GS-DD-FDn"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Change language" image="gearshape" catalog="system" changesSelectionAsPrimaryAction="YES" id="OuU-KX-6zC"/>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="addButton" destination="ycv-An-nlC" id="GmF-fB-3lV"/>
+                        <outlet property="changeLanguageButton" destination="OuU-KX-6zC" id="pWO-nC-Pcc"/>
                         <outlet property="startButton" destination="0O4-h4-tPC" id="FdG-FS-SCt"/>
                         <outlet property="tableView" destination="x3l-2o-7ec" id="Gdj-Jy-9mt"/>
                     </connections>
@@ -292,7 +296,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="playAgainButton" destination="2ES-1G-UwL" id="8JK-4q-qlr"/>
                         <outlet property="tableView" destination="e9z-Ef-Sa9" id="Q7j-YN-Xqm"/>
+                        <outlet property="titleLabel" destination="3rF-iY-Wvk" id="FXm-vL-NAa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="580-92-UNZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -564,13 +570,16 @@
                         <outlet property="roll1CompleteButton" destination="wYD-yB-GnO" id="CP9-l8-G7Q"/>
                         <outlet property="roll1Label" destination="x5B-qy-g4C" id="7Kv-35-gWi"/>
                         <outlet property="roll1StrikeButton" destination="XFU-WZ-Hq4" id="bQe-OJ-Fif"/>
+                        <outlet property="roll1TitleLabel" destination="vyG-lP-N0I" id="hTV-DL-Arn"/>
                         <outlet property="roll2CompleteButton" destination="Ofr-QS-2Ba" id="6Fd-Us-TXZ"/>
                         <outlet property="roll2Label" destination="aCg-x7-G0i" id="ji2-Df-EdU"/>
                         <outlet property="roll2StrikeButton" destination="aha-YB-qql" id="xeK-Cd-k8G"/>
+                        <outlet property="roll2TitleLabel" destination="yJ9-vr-CEl" id="9Jg-Pz-eEK"/>
                         <outlet property="roll2View" destination="j6G-gr-cwT" id="nlg-VW-1y5"/>
                         <outlet property="roll3CompleteButton" destination="D4T-00-eXp" id="IqE-wn-Fgz"/>
                         <outlet property="roll3Label" destination="wt6-p7-wrJ" id="gxA-ME-sJh"/>
                         <outlet property="roll3StrikeButton" destination="9Ln-he-1tR" id="m7n-9p-Btq"/>
+                        <outlet property="roll3TitleLabel" destination="MGi-SL-I9y" id="K7h-KT-wzy"/>
                         <outlet property="roll3View" destination="E2A-6J-EsV" id="EOM-gB-hYT"/>
                         <outlet property="roundLabel" destination="IMx-5G-ifX" id="qmV-HW-L7x"/>
                     </connections>
@@ -581,6 +590,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="gearshape" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -18,15 +18,19 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        updateTranslations()
         reloadScreen()
     }
 
     func reloadScreen() {
-        roundLabel.text = "Round \(game.currentRound)"
+        roundLabel.text = "Round".localized + " " + "\(game.currentRound)"
         tableView.reloadData()
         if game.currentRound == 10 {
             nextButton.isEnabled = false
-            finishButton.isEnabled = true
+            if game.scores.count == game.currentRound,
+               game.scores[game.currentRound - 1].friendsScores.count == friends.count {
+                finishButton.isEnabled = true
+            }
         } else {
             if game.scores.count == game.currentRound {
                 if game.scores[game.currentRound - 1].friendsScores.count == friends.count {
@@ -55,7 +59,7 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
         cell.nameLabel.text = friends[indexPath.row]
         if game.scores.count < game.currentRound {
-            cell.scoreLabel.text = "Pending" + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))"
+            cell.scoreLabel.text = "Pending".localized + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))".localized
             if indexPath.row == 0 {
                 cell.accessoryType = .disclosureIndicator
             } else {
@@ -63,7 +67,7 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
             }
         } else {
             if game.scores[game.currentRound - 1].friendsScores.count <= indexPath.row {
-                cell.scoreLabel.text = "Pending" + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))"
+                cell.scoreLabel.text = "Pending".localized + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))".localized
                 if indexPath.row == game.scores[game.currentRound - 1].friendsScores.count {
                     cell.accessoryType = .disclosureIndicator
                 } else if indexPath.row < game.scores[game.currentRound - 1].friendsScores.count {
@@ -76,12 +80,12 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
                 let sum = score.scores.reduce(0, +)
                 if sum == 10 {
                     if score.scores.count == 1 {
-                        cell.scoreLabel.text = "10 + 2 next rolls" + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))"
+                        cell.scoreLabel.text = "10 + 2 next rolls".localized + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))".localized
                     } else {
-                        cell.scoreLabel.text = "10 + next roll" + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))"
+                        cell.scoreLabel.text = "10 + next roll".localized + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))".localized
                     }
                 } else {
-                    cell.scoreLabel.text = "\(sum)" + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))"
+                    cell.scoreLabel.text = "\(sum)" + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))".localized
                 }
                 cell.accessoryType = .checkmark
             }
@@ -115,6 +119,11 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
                 return
             }
         }
+    }
+
+    func updateTranslations() {
+        nextButton.setTitle("Next round".localized, for: .normal)
+        finishButton.setTitle("Finish game".localized, for: .normal)
     }
 
 }

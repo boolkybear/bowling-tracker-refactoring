@@ -5,15 +5,22 @@ class FriendEntryViewController: UIViewController, UITableViewDataSource, UITabl
 
     @IBOutlet var tableView: UITableView!
     @IBOutlet var addButton: UIBarButtonItem!
+    @IBOutlet var changeLanguageButton: UIBarButtonItem!
     @IBOutlet var startButton: UIButton!
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        updateTranslations()
+    }
+
     @IBAction @objc func addFriend() {
-        let alert = UIAlertController(title: "Add Friend", message: "Enter friend's name", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Add Friend".localized, message: "Enter friend's name".localized, preferredStyle: .alert)
         alert.addTextField { textField in
-            textField.placeholder = "Name"
+            textField.placeholder = "Name".localized
         }
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alert.addAction(UIAlertAction(title: "Add", style: .default) { [weak self] _ in
+        alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel))
+        alert.addAction(UIAlertAction(title: "Add".localized, style: .default) { [weak self] _ in
             if let name = alert.textFields?.first?.text, !name.isEmpty {
                 friends.append(name)
                 self?.tableView.reloadData()
@@ -37,5 +44,27 @@ class FriendEntryViewController: UIViewController, UITableViewDataSource, UITabl
         }
         cell.friendLabel.text = friends[indexPath.row]
         return cell
+    }
+
+    private func updateTranslations() {
+        self.navigationItem.title = "Add friends".localized
+        startButton.setTitle("Start game".localized, for: .normal)
+
+        var language = UserDefaults.standard.string(forKey: "appLanguage") ?? "en"
+        let validLanguages = ["es", "en"]
+        if !validLanguages.contains(language) {
+            language = "en"
+        }
+        let menu = UIMenu(title: "Change language".localized, options: [.singleSelection], children: [
+            UIAction(title: "English".localized, state: language == "en" ? .on : .off) { [weak self] _ in
+                UserDefaults.standard.setValue("en", forKey: "appLanguage")
+                self?.updateTranslations()
+            },
+            UIAction(title: "Spanish".localized, state: language == "es" ? .on : .off) { [weak self] _ in
+                UserDefaults.standard.setValue("es", forKey: "appLanguage")
+                self?.updateTranslations()
+            }
+        ])
+        changeLanguageButton.menu = menu
     }
 }

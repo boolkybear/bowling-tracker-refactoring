@@ -5,10 +5,14 @@ class SummaryViewController: UIViewController, UITableViewDataSource, UITableVie
 
     var sortedScores: [(String, Int)] = []
 
+    @IBOutlet var titleLabel: UILabel!
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var playAgainButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        updateTranslations()
 
         var scores: [Int] = []
         var index = 0
@@ -67,5 +71,10 @@ class SummaryViewController: UIViewController, UITableViewDataSource, UITableVie
             game.currentRound = 1
             game.scores = []
         }
+    }
+
+    func updateTranslations() {
+        titleLabel.text = "Game finished".localized
+        playAgainButton.setTitle("Play again".localized, for: .normal)
     }
 }

@@ -21,14 +21,17 @@ class PinRollViewController: UIViewController {
     @IBOutlet var pin8switch: UISwitch!
     @IBOutlet var pin9switch: UISwitch!
     @IBOutlet var pin10switch: UISwitch!
+    @IBOutlet var roll1TitleLabel: UILabel!
     @IBOutlet var roll1Label: UILabel!
     @IBOutlet var roll1StrikeButton: UIButton!
     @IBOutlet var roll1CompleteButton: UIButton!
     @IBOutlet var roll2View: UIView!
+    @IBOutlet var roll2TitleLabel: UILabel!
     @IBOutlet var roll2StrikeButton: UIButton!
     @IBOutlet var roll2CompleteButton: UIButton!
     @IBOutlet var roll2Label: UILabel!
     @IBOutlet var roll3View: UIView!
+    @IBOutlet var roll3TitleLabel: UILabel!
     @IBOutlet var roll3StrikeButton: UIButton!
     @IBOutlet var roll3CompleteButton: UIButton!
     @IBOutlet var roll3Label: UILabel!
@@ -41,7 +44,7 @@ class PinRollViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        roundLabel.text = "Round \(game.currentRound)"
+        updateTranslations()
         if game.scores.count == game.currentRound {
             friendLabel.text = friends[game.scores[game.currentRound - 1].friendsScores.count]
         } else {
@@ -68,7 +71,7 @@ class PinRollViewController: UIViewController {
         for pin in allSwitches {
             pin?.setOn(false, animated: true)
         }
-        roll1Label.text = "10"
+        roll1Label.text = "10".localized
     }
 
     @IBAction @objc func complete1() {
@@ -90,7 +93,7 @@ class PinRollViewController: UIViewController {
             if game.currentRound == 10 {
                 roll2View.isHidden = false
                 roll2Label.text = ""
-                roll2StrikeButton.setTitle("Strike", for: .normal)
+                roll2StrikeButton.setTitle("Strike".localized, for: .normal)
                 for pin in allSwitches {
                     pin?.setOn(true, animated: true)
                     pin?.isEnabled = true
@@ -111,7 +114,7 @@ class PinRollViewController: UIViewController {
         }
         if game.currentRound == 10 {
             if scores[0] == 10 {
-                roll2Label.text = "10"
+                roll2Label.text = "10".localized
             } else {
                 let round = 10 - scores[0]
                 roll2Label.text = "\(round)"
@@ -149,14 +152,15 @@ class PinRollViewController: UIViewController {
             if scores[0] == 10 || scores[0] + scores[1] == 10 {
                 roll3View.isHidden = false
                 roll3Label.text = ""
-                if scores[0] == 10, scores[1] == 10 {
-                    roll3StrikeButton.setTitle("Strike", for: .normal)
+                if scores[0] == 10 && scores[1] == 10 ||
+                   (scores[0] != 10 && scores[0] + scores[1] == 10) {
+                    roll3StrikeButton.setTitle("Strike".localized, for: .normal)
                     for pin in allSwitches {
                         pin?.setOn(true, animated: true)
                         pin?.isEnabled = true
                     }
                 } else if scores[0] == 10, scores[1] < 10 {
-                    roll3StrikeButton.setTitle("Spare", for: .normal)
+                    roll3StrikeButton.setTitle("Spare".localized, for: .normal)
                 }
             } else {
                 finishFrameButton.isEnabled = true
@@ -172,7 +176,7 @@ class PinRollViewController: UIViewController {
             pin?.setOn(false, animated: true)
         }
         if scores[1] == 10 {
-            roll3Label.text = "10"
+            roll3Label.text = "10".localized
         } else if scores[0] == 10 {
             let round = 10 - scores[1]
             roll3Label.text = "\(round)"
@@ -211,6 +215,20 @@ class PinRollViewController: UIViewController {
 
         previousViewController?.reloadScreen()
         dismiss(animated: true)
+    }
+
+    func updateTranslations() {
+        roundLabel.text = "Round".localized + " " + "\(game.currentRound)"
+        roll1TitleLabel.text = "Roll 1".localized
+        roll1StrikeButton.setTitle("Strike".localized, for: .normal)
+        roll1CompleteButton.setTitle("Complete".localized, for: .normal)
+        roll2TitleLabel.text = "Roll 2".localized
+        roll2StrikeButton.setTitle("Spare".localized, for: .normal)
+        roll2CompleteButton.setTitle("Complete".localized, for: .normal)
+        roll3TitleLabel.text = "Roll 3".localized
+        roll3StrikeButton.setTitle("Strike".localized, for: .normal)
+        roll3CompleteButton.setTitle("Complete".localized, for: .normal)
+        finishFrameButton.setTitle("Finish frame".localized, for: .normal)
     }
 
 }
