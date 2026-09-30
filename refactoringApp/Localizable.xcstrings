@@ -97,6 +97,17 @@
         }
       }
     },
+    "Add up to 10 friends to this game" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añade hasta 10 amigos a esta partida"
+          }
+        }
+      }
+    },
     "Cancel" : {
       "extractionState" : "manual",
       "localizations" : {

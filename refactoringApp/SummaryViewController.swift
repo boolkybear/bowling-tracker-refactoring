@@ -46,7 +46,7 @@ class SummaryViewController: UIViewController, UITableViewDataSource, UITableVie
             index += 1
         }
         let pairs = zip(friends, scores)
-        sortedScores = pairs.sorted(by: { return $0.1 < $1.1 })
+        sortedScores = pairs.sorted(by: { return $0.1 < $1.1 }).reversed()
         tableView.reloadData()
     }
 
@@ -59,9 +59,13 @@ class SummaryViewController: UIViewController, UITableViewDataSource, UITableVie
             return UITableViewCell()
         }
 
+        let colors: [UIColor] = [.green, .yellow, .orange, .red, .red, .red, .red, .red, .red, .red]
+
         cell.positionLabel.text = "\(indexPath.row + 1)"
         cell.nameLabel.text = sortedScores[indexPath.row].0
         cell.scoreLabel.text = "\(sortedScores[indexPath.row].1)"
+        cell.backgroundColorView.backgroundColor = colors[indexPath.row]
+        cell.contentView.backgroundColor = colors[indexPath.row].withAlphaComponent(0.2)
 
         return cell
     }

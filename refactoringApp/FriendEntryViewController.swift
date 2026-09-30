@@ -7,6 +7,7 @@ class FriendEntryViewController: UIViewController, UITableViewDataSource, UITabl
     @IBOutlet var addButton: UIBarButtonItem!
     @IBOutlet var changeLanguageButton: UIBarButtonItem!
     @IBOutlet var startButton: UIButton!
+    @IBOutlet var titleLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,9 +47,14 @@ class FriendEntryViewController: UIViewController, UITableViewDataSource, UITabl
         return cell
     }
 
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+
     private func updateTranslations() {
         self.navigationItem.title = "Add friends".localized
         startButton.setTitle("Start game".localized, for: .normal)
+        titleLabel.text = "Add up to 10 friends to this game".localized
 
         var language = UserDefaults.standard.string(forKey: "appLanguage") ?? "en"
         let validLanguages = ["es", "en"]

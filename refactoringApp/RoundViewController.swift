@@ -73,7 +73,7 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
                 } else if indexPath.row < game.scores[game.currentRound - 1].friendsScores.count {
                     cell.accessoryType = .checkmark
                 } else {
-                    cell.accessoryType = .checkmark
+                    cell.accessoryType = .none
                 }
             } else {
                 let score = game.scores[game.currentRound - 1].friendsScores[indexPath.row]

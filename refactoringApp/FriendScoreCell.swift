@@ -12,6 +12,7 @@ class FriendScoreCell: UITableViewCell {
     @IBOutlet var positionLabel: UILabel!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var scoreLabel: UILabel!
+    @IBOutlet var backgroundColorView: UIView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
