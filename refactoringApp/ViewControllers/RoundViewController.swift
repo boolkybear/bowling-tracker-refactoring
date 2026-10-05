@@ -21,17 +21,17 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
 
     func reloadScreen() {
-        roundLabel.text = "Round".localized + " " + "\(game.currentRound)"
+        roundLabel.text = "Round".localized + " " + "\(state.game.currentRound)"
         tableView.reloadData()
-        if game.currentRound == 10 {
+        if state.game.currentRound == 10 {
             nextButton.isEnabled = false
-            if game.scores.count == game.currentRound,
-               game.scores[game.currentRound - 1].friendsScores.count == friends.count {
+            if state.game.scores.count == state.game.currentRound,
+               state.game.scores[state.game.currentRound - 1].friendsScores.count == state.friends.count {
                 finishButton.isEnabled = true
             }
         } else {
-            if game.scores.count == game.currentRound {
-                if game.scores[game.currentRound - 1].friendsScores.count == friends.count {
+            if state.game.scores.count == state.game.currentRound {
+                if state.game.scores[state.game.currentRound - 1].friendsScores.count == state.friends.count {
                     nextButton.isEnabled = true
                 } else {
                     nextButton.isEnabled = false
@@ -43,20 +43,20 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
 
     @IBAction @objc func goToNextRound() {
-        game.currentRound += 1
+        state.game.currentRound += 1
         reloadScreen()
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return friends.count
+        return state.friends.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendRoundScoreCell") as? FriendRoundScoreCell else {
             return UITableViewCell()
         }
-        cell.nameLabel.text = friends[indexPath.row]
-        if game.scores.count < game.currentRound {
+        cell.nameLabel.text = state.friends[indexPath.row]
+        if state.game.scores.count < state.game.currentRound {
             cell.scoreLabel.text = "Pending".localized + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))".localized
             if indexPath.row == 0 {
                 cell.accessoryType = .disclosureIndicator
@@ -64,17 +64,17 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
                 cell.accessoryType = .none
             }
         } else {
-            if game.scores[game.currentRound - 1].friendsScores.count <= indexPath.row {
+            if state.game.scores[state.game.currentRound - 1].friendsScores.count <= indexPath.row {
                 cell.scoreLabel.text = "Pending".localized + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))".localized
-                if indexPath.row == game.scores[game.currentRound - 1].friendsScores.count {
+                if indexPath.row == state.game.scores[state.game.currentRound - 1].friendsScores.count {
                     cell.accessoryType = .disclosureIndicator
-                } else if indexPath.row < game.scores[game.currentRound - 1].friendsScores.count {
+                } else if indexPath.row < state.game.scores[state.game.currentRound - 1].friendsScores.count {
                     cell.accessoryType = .checkmark
                 } else {
                     cell.accessoryType = .none
                 }
             } else {
-                let score = game.scores[game.currentRound - 1].friendsScores[indexPath.row]
+                let score = state.game.scores[state.game.currentRound - 1].friendsScores[indexPath.row]
                 let sum = score.scores.reduce(0, +)
                 if sum == 10 {
                     if score.scores.count == 1 {
@@ -94,7 +94,7 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        if game.scores.count < game.currentRound {
+        if state.game.scores.count < state.game.currentRound {
             if indexPath.row == 0 {
                 let storyBoard = UIStoryboard(name: "Main", bundle: nil)
                 guard let vc = storyBoard.instantiateViewController(withIdentifier: "PinRollViewController") as? PinRollViewController else {
@@ -106,7 +106,7 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
                 return
             }
         } else {
-            if indexPath.row == game.scores[game.currentRound - 1].friendsScores.count {
+            if indexPath.row == state.game.scores[state.game.currentRound - 1].friendsScores.count {
                 let storyBoard = UIStoryboard(name: "Main", bundle: nil)
                 guard let vc = storyBoard.instantiateViewController(withIdentifier: "PinRollViewController") as? PinRollViewController else {
                     return

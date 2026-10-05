@@ -43,10 +43,10 @@ class PinRollViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         updateTranslations()
-        if game.scores.count == game.currentRound {
-            friendLabel.text = friends[game.scores[game.currentRound - 1].friendsScores.count]
+        if state.game.scores.count == state.game.currentRound {
+            friendLabel.text = state.friends[state.game.scores[state.game.currentRound - 1].friendsScores.count]
         } else {
-            friendLabel.text = friends[0]
+            friendLabel.text = state.friends[0]
         }
         roll1Label.text = ""
         roll2View.isHidden = true
@@ -88,7 +88,7 @@ class PinRollViewController: UIViewController {
         roll1StrikeButton.isEnabled = false
         roll1CompleteButton.isEnabled = false
         if total == 10 {
-            if game.currentRound == 10 {
+            if state.game.currentRound == 10 {
                 roll2View.isHidden = false
                 roll2Label.text = ""
                 roll2StrikeButton.setTitle("Strike".localized, for: .normal)
@@ -110,7 +110,7 @@ class PinRollViewController: UIViewController {
         for pin in allSwitches {
             pin?.setOn(false, animated: true)
         }
-        if game.currentRound == 10 {
+        if state.game.currentRound == 10 {
             if scores[0] == 10 {
                 roll2Label.text = "10".localized
             } else {
@@ -135,7 +135,7 @@ class PinRollViewController: UIViewController {
             }
         }
         var round = total
-        if game.currentRound == 10 {
+        if state.game.currentRound == 10 {
             if scores[0] != 10 {
                 round -= scores[0]
             }
@@ -146,7 +146,7 @@ class PinRollViewController: UIViewController {
         roll2Label.text = "\(round)"
         roll2StrikeButton.isEnabled = false
         roll2CompleteButton.isEnabled = false
-        if game.currentRound == 10 {
+        if state.game.currentRound == 10 {
             if scores[0] == 10 || scores[0] + scores[1] == 10 {
                 roll3View.isHidden = false
                 roll3Label.text = ""
@@ -204,19 +204,19 @@ class PinRollViewController: UIViewController {
     }
 
     @IBAction @objc func finishFrame() {
-        if game.scores.count < game.currentRound {
-            game.scores.append(RoundScore())
+        if state.game.scores.count < state.game.currentRound {
+            state.game.scores.append(RoundScore())
         }
         let score = Score()
         score.scores = scores
-        game.scores[game.currentRound - 1].friendsScores.append(score)
+        state.game.scores[state.game.currentRound - 1].friendsScores.append(score)
 
         previousViewController?.reloadScreen()
         dismiss(animated: true)
     }
 
     func updateTranslations() {
-        roundLabel.text = "Round".localized + " " + "\(game.currentRound)"
+        roundLabel.text = "Round".localized + " " + "\(state.game.currentRound)"
         roll1TitleLabel.text = "Roll 1".localized
         roll1StrikeButton.setTitle("Strike".localized, for: .normal)
         roll1CompleteButton.setTitle("Complete".localized, for: .normal)

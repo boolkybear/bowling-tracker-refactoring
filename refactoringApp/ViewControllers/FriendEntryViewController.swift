@@ -23,9 +23,9 @@ class FriendEntryViewController: UIViewController, UITableViewDataSource, UITabl
         alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel))
         alert.addAction(UIAlertAction(title: "Add".localized, style: .default) { [weak self] _ in
             if let name = alert.textFields?.first?.text, !name.isEmpty {
-                friends.append(name)
+                state.friends.append(name)
                 self?.tableView.reloadData()
-                if friends.count >= 10 {
+                if state.friends.count >= 10 {
                     self?.addButton.isEnabled = false
                 }
                 self?.startButton.isEnabled = true
@@ -36,14 +36,14 @@ class FriendEntryViewController: UIViewController, UITableViewDataSource, UITabl
 
     // UITableViewDataSource methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return friends.count
+        return state.friends.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendCell", for: indexPath) as? FriendCell else {
             return UITableViewCell()
         }
-        cell.friendLabel.text = friends[indexPath.row]
+        cell.friendLabel.text = state.friends[indexPath.row]
         return cell
     }
 

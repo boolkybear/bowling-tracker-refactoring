@@ -5,6 +5,8 @@
 
 import UIKit
 
+var state: GameState = DefaultGameState()
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

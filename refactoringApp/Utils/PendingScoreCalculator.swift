@@ -5,7 +5,7 @@
 
 class PendingScoreCalculator {
     static func calculateScore(friend: Int) -> Int {
-        var friendScores = game.scores.map { round in
+        var friendScores = state.game.scores.map { round in
             if friend < round.friendsScores.count {
                 return round.friendsScores[friend]
             } else {

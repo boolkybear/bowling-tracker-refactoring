@@ -16,21 +16,21 @@ class SummaryViewController: UIViewController, UITableViewDataSource, UITableVie
 
         var scores: [Int] = []
         var index = 0
-        for _ in friends {
+        for _ in state.friends {
             var total = 0
             for round in (0..<10) {
                 if round == 9 {
-                    let score = game.scores[round].friendsScores[index]
+                    let score = state.game.scores[round].friendsScores[index]
                     let sum = score.scores.reduce(0, +)
                     total += sum
                 } else {
-                    let score = game.scores[round].friendsScores[index]
+                    let score = state.game.scores[round].friendsScores[index]
                     var sum = score.scores.reduce(0, +)
                     if sum == 10 {
                         var nextRolls: [Int] = []
                         let nextRound = round + 1
                         for next in (nextRound..<10) {
-                            nextRolls.append(contentsOf: game.scores[next].friendsScores[index].scores)
+                            nextRolls.append(contentsOf: state.game.scores[next].friendsScores[index].scores)
                         }
                         sum += nextRolls[0]
                         if score.scores.count == 1 {
@@ -45,7 +45,7 @@ class SummaryViewController: UIViewController, UITableViewDataSource, UITableVie
             scores.append(total)
             index += 1
         }
-        let pairs = zip(friends, scores)
+        let pairs = zip(state.friends, scores)
         sortedScores = pairs.sorted(by: { return $0.1 < $1.1 }).reversed()
         tableView.reloadData()
     }
@@ -73,8 +73,8 @@ class SummaryViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBAction @objc func returnToFriendList() {
         let parentViewController = presentingViewController?.presentingViewController ?? presentingViewController ?? self
         parentViewController.dismiss(animated: true) {
-            game.currentRound = 1
-            game.scores = []
+            state.game.currentRound = 1
+            state.game.scores = []
         }
     }
 
