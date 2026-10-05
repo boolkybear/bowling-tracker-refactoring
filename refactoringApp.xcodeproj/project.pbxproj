@@ -6,7 +6,18 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		BB065695306D58C7004AFFE5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BBF7363C306A3F6E00D3B1DF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BBF73643306A3F6E00D3B1DF;
+			remoteInfo = refactoringApp;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		BB065691306D58C7004AFFE5 /* refactoringAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = refactoringAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBF73644306A3F6E00D3B1DF /* refactoringApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = refactoringApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -21,6 +32,11 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		BB065692306D58C7004AFFE5 /* refactoringAppTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = refactoringAppTests;
+			sourceTree = "<group>";
+		};
 		BBF73646306A3F6E00D3B1DF /* refactoringApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -32,6 +48,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		BB06568E306D58C7004AFFE5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BBF73641306A3F6E00D3B1DF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -46,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				BBF73646306A3F6E00D3B1DF /* refactoringApp */,
+				BB065692306D58C7004AFFE5 /* refactoringAppTests */,
 				BBF73645306A3F6E00D3B1DF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				BBF73644306A3F6E00D3B1DF /* refactoringApp.app */,
+				BB065691306D58C7004AFFE5 /* refactoringAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -61,6 +86,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		BB065690306D58C7004AFFE5 /* refactoringAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BB065697306D58C7004AFFE5 /* Build configuration list for PBXNativeTarget "refactoringAppTests" */;
+			buildPhases = (
+				BB06568D306D58C7004AFFE5 /* Sources */,
+				BB06568E306D58C7004AFFE5 /* Frameworks */,
+				BB06568F306D58C7004AFFE5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BB065696306D58C7004AFFE5 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				BB065692306D58C7004AFFE5 /* refactoringAppTests */,
+			);
+			name = refactoringAppTests;
+			packageProductDependencies = (
+			);
+			productName = refactoringAppTests;
+			productReference = BB065691306D58C7004AFFE5 /* refactoringAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		BBF73643306A3F6E00D3B1DF /* refactoringApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BBF73657306A3F6F00D3B1DF /* Build configuration list for PBXNativeTarget "refactoringApp" */;
@@ -93,6 +141,10 @@
 				LastSwiftUpdateCheck = 2660;
 				LastUpgradeCheck = 2660;
 				TargetAttributes = {
+					BB065690306D58C7004AFFE5 = {
+						CreatedOnToolsVersion = 26.6;
+						TestTargetID = BBF73643306A3F6E00D3B1DF;
+					};
 					BBF73643306A3F6E00D3B1DF = {
 						CreatedOnToolsVersion = 26.6;
 					};
@@ -114,11 +166,19 @@
 			projectRoot = "";
 			targets = (
 				BBF73643306A3F6E00D3B1DF /* refactoringApp */,
+				BB065690306D58C7004AFFE5 /* refactoringAppTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		BB06568F306D58C7004AFFE5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BBF73642306A3F6E00D3B1DF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -129,6 +189,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		BB06568D306D58C7004AFFE5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BBF73640306A3F6E00D3B1DF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -138,7 +205,55 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		BB065696306D58C7004AFFE5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BBF73643306A3F6E00D3B1DF /* refactoringApp */;
+			targetProxy = BB065695306D58C7004AFFE5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		BB065698306D58C7004AFFE5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = es.plexus.refactoringAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/refactoringApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/refactoringApp";
+			};
+			name = Debug;
+		};
+		BB065699306D58C7004AFFE5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = es.plexus.refactoringAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/refactoringApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/refactoringApp";
+			};
+			name = Release;
+		};
 		BBF73658306A3F6F00D3B1DF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -329,6 +444,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		BB065697306D58C7004AFFE5 /* Build configuration list for PBXNativeTarget "refactoringAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB065698306D58C7004AFFE5 /* Debug */,
+				BB065699306D58C7004AFFE5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		BBF7363F306A3F6E00D3B1DF /* Build configuration list for PBXProject "refactoringApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
