@@ -71,7 +71,8 @@ class SummaryViewController: UIViewController, UITableViewDataSource, UITableVie
     }
 
     @IBAction @objc func returnToFriendList() {
-        presentingViewController?.dismiss(animated: true) {
+        let parentViewController = presentingViewController?.presentingViewController ?? presentingViewController ?? self
+        parentViewController.dismiss(animated: true) {
             game.currentRound = 1
             game.scores = []
         }
