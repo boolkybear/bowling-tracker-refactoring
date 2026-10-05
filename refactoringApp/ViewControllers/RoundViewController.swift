@@ -125,3 +125,5 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
 
 }
+
+extension RoundViewController: ScreenReloadable {}

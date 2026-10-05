@@ -35,7 +35,7 @@ class PinRollViewController: UIViewController {
     @IBOutlet var roll3Label: UILabel!
     @IBOutlet var finishFrameButton: UIButton!
 
-    weak var previousViewController: RoundViewController?
+    weak var previousViewController: ScreenReloadable?
     var scores: [Int] = []
 
     override func viewDidLoad() {
