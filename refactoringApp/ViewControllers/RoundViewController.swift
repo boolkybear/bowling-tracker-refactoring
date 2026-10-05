@@ -101,6 +101,7 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
                     return
                 }
                 vc.previousViewController = self
+                vc.state = state
                 present(vc, animated: true)
             } else {
                 return
@@ -112,6 +113,7 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
                     return
                 }
                 vc.previousViewController = self
+                vc.state = state
                 present(vc, animated: true)
             } else {
                 return

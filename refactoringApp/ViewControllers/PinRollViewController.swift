@@ -37,9 +37,14 @@ class PinRollViewController: UIViewController {
 
     weak var previousViewController: ScreenReloadable?
     var scores: [Int] = []
+    var state: GameState?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        guard let state else {
+            return
+        }
 
         // Do any additional setup after loading the view.
         updateTranslations()
@@ -73,6 +78,10 @@ class PinRollViewController: UIViewController {
     }
 
     @IBAction @objc func complete1() {
+        guard let state else {
+            return
+        }
+
         let allSwitches = [pin1switch, pin2switch, pin3switch, pin4switch, pin5switch, pin6switch, pin7switch, pin8switch, pin9switch, pin10switch]
         var total = 0
         for pin in allSwitches {
@@ -106,6 +115,10 @@ class PinRollViewController: UIViewController {
     }
 
     @IBAction @objc func strike2() {
+        guard let state else {
+            return
+        }
+
         let allSwitches = [pin1switch, pin2switch, pin3switch, pin4switch, pin5switch, pin6switch, pin7switch, pin8switch, pin9switch, pin10switch]
         for pin in allSwitches {
             pin?.setOn(false, animated: true)
@@ -124,6 +137,10 @@ class PinRollViewController: UIViewController {
     }
 
     @IBAction @objc func complete2() {
+        guard let state else {
+            return
+        }
+
         let allSwitches = [pin1switch, pin2switch, pin3switch, pin4switch, pin5switch, pin6switch, pin7switch, pin8switch, pin9switch, pin10switch]
         var total = 0
         for pin in allSwitches {
@@ -204,6 +221,10 @@ class PinRollViewController: UIViewController {
     }
 
     @IBAction @objc func finishFrame() {
+        guard let state else {
+            return
+        }
+
         if state.game.scores.count < state.game.currentRound {
             state.game.scores.append(RoundScore())
         }
@@ -216,6 +237,10 @@ class PinRollViewController: UIViewController {
     }
 
     func updateTranslations() {
+        guard let state else {
+            return
+        }
+
         roundLabel.text = "Round".localized + " " + "\(state.game.currentRound)"
         roll1TitleLabel.text = "Roll 1".localized
         roll1StrikeButton.setTitle("Strike".localized, for: .normal)
