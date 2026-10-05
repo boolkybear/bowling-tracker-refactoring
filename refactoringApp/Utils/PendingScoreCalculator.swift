@@ -45,11 +45,11 @@ class PendingScoreCalculator {
 
     static func isStrike(_ score: Score) -> Bool {
         let isStrike = score.scores.count == 1 && score.scores[0] == 10
-        return isStrike ? true : false
+        return isStrike
     }
 
     static func isSpare(_ score: Score) -> Bool {
         let isSpare = score.scores.count == 2 && score.scores[0] + score.scores[1] == 10
-        return isSpare ? true : false
+        return isSpare
     }
 }
