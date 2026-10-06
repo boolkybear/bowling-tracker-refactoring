@@ -79,21 +79,17 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
                 cell.scoreLabel.text = "Pending".localized + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))".localized
                 if indexPath.row == state.game.scores[state.game.currentRound - 1].friendsScores.count {
                     cell.accessoryType = .disclosureIndicator
-                } else if indexPath.row < state.game.scores[state.game.currentRound - 1].friendsScores.count {
-                    cell.accessoryType = .checkmark
                 } else {
                     cell.accessoryType = .none
                 }
             } else {
                 let score = state.game.scores[state.game.currentRound - 1].friendsScores[indexPath.row]
-                let sum = score.scores.reduce(0, +)
-                if sum == 10 {
-                    if score.scores.count == 1 {
-                        cell.scoreLabel.text = "10 + 2 next rolls".localized + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))".localized
-                    } else {
-                        cell.scoreLabel.text = "10 + next roll".localized + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))".localized
-                    }
+                if PendingScoreCalculator.isStrike(score) {
+                    cell.scoreLabel.text = "10 + 2 next rolls".localized + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))".localized
+                } else if PendingScoreCalculator.isSpare(score) {
+                    cell.scoreLabel.text = "10 + next roll".localized + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))".localized
                 } else {
+                    let sum = PendingScoreCalculator.getScoreSum(score)
                     cell.scoreLabel.text = "\(sum)" + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))".localized
                 }
                 cell.accessoryType = .checkmark
