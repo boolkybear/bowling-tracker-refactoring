@@ -31,16 +31,11 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
         tableView.reloadData()
         if state.game.isLastRound {
             nextButton.isEnabled = false
-            if state.game.isCurrentRoundScoreCreated,
-               state.isCurrentRoundFinishedForAllFriends {
+            if state.isCurrentRoundFinishedForAllFriends {
                 finishButton.isEnabled = true
             }
         } else {
-            if state.game.isCurrentRoundScoreCreated {
-                nextButton.isEnabled = state.isCurrentRoundFinishedForAllFriends
-            } else {
-                nextButton.isEnabled = false
-            }
+            nextButton.isEnabled = state.isCurrentRoundFinishedForAllFriends
         }
     }
 
@@ -67,33 +62,24 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
             return UITableViewCell()
         }
         cell.nameLabel.text = state.friends[indexPath.row]
-        if !state.game.isCurrentRoundScoreCreated {
+        if state.currentFriendTurnIndex <= indexPath.row {
             cell.scoreLabel.text = "Pending".localized + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))".localized
-            if indexPath.row == 0 {
+            if indexPath.row == state.currentFriendTurnIndex {
                 cell.accessoryType = .disclosureIndicator
             } else {
                 cell.accessoryType = .none
             }
         } else {
-            if state.currentFriendTurnIndex <= indexPath.row {
-                cell.scoreLabel.text = "Pending".localized + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))".localized
-                if indexPath.row == state.currentFriendTurnIndex {
-                    cell.accessoryType = .disclosureIndicator
-                } else {
-                    cell.accessoryType = .none
-                }
+            let score = state.game.scores[state.game.currentRound - 1].friendsScores[indexPath.row]
+            if PendingScoreCalculator.isStrike(score) {
+                cell.scoreLabel.text = "10 + 2 next rolls".localized + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))".localized
+            } else if PendingScoreCalculator.isSpare(score) {
+                cell.scoreLabel.text = "10 + next roll".localized + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))".localized
             } else {
-                let score = state.game.scores[state.game.currentRound - 1].friendsScores[indexPath.row]
-                if PendingScoreCalculator.isStrike(score) {
-                    cell.scoreLabel.text = "10 + 2 next rolls".localized + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))".localized
-                } else if PendingScoreCalculator.isSpare(score) {
-                    cell.scoreLabel.text = "10 + next roll".localized + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))".localized
-                } else {
-                    let sum = PendingScoreCalculator.getScoreSum(score)
-                    cell.scoreLabel.text = "\(sum)" + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))".localized
-                }
-                cell.accessoryType = .checkmark
+                let sum = PendingScoreCalculator.getScoreSum(score)
+                cell.scoreLabel.text = "\(sum)" + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))".localized
             }
+            cell.accessoryType = .checkmark
         }
         return cell
     }
@@ -105,30 +91,16 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
             return
         }
 
-        if !state.game.isCurrentRoundScoreCreated {
-            if indexPath.row == 0 {
-                let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-                guard let vc = storyBoard.instantiateViewController(withIdentifier: "PinRollViewController") as? PinRollViewController else {
-                    return
-                }
-                vc.previousViewController = self
-                vc.state = state
-                present(vc, animated: true)
-            } else {
+        if indexPath.row == state.currentFriendTurnIndex {
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            guard let vc = storyBoard.instantiateViewController(withIdentifier: "PinRollViewController") as? PinRollViewController else {
                 return
             }
+            vc.previousViewController = self
+            vc.state = state
+            present(vc, animated: true)
         } else {
-            if indexPath.row == state.currentFriendTurnIndex {
-                let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-                guard let vc = storyBoard.instantiateViewController(withIdentifier: "PinRollViewController") as? PinRollViewController else {
-                    return
-                }
-                vc.previousViewController = self
-                vc.state = state
-                present(vc, animated: true)
-            } else {
-                return
-            }
+            return
         }
     }
 

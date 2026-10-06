@@ -225,9 +225,6 @@ class PinRollViewController: UIViewController {
             return
         }
 
-        if state.game.scores.count < state.game.currentRound {
-            state.game.scores.append(RoundScore())
-        }
         let score = Score()
         score.scores = scores
         state.game.scores[state.game.currentRound - 1].friendsScores.append(score)

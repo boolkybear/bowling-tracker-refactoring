@@ -77,7 +77,7 @@ struct RoundViewControllerTests {
     @MainActor
     @Test func when_reloadScreenIsCalledAndIsNotLastRoundAndNoFriendsHaveShot_then_nextShouldNotBeEnabledAndFinishShouldNotBeEnabled() throws {
         state.game.currentRound = 1
-        state.game.scores = []
+        state.game.scores = [RoundScore()]
         sut.reloadScreen()
         #expect(!sut.nextButton.isEnabled)
         #expect(!sut.finishButton.isEnabled)

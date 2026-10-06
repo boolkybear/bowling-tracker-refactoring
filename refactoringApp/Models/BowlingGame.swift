@@ -2,7 +2,7 @@
 import Foundation
 
 class BowlingGame {
-    var scores: [RoundScore] = []
+    var scores: [RoundScore] = [RoundScore()]
     var currentRound = 1
 }
 
@@ -25,5 +25,6 @@ extension BowlingGame {
 
     func advanceRound() {
         currentRound += 1
+        scores.append(RoundScore())
     }
 }
