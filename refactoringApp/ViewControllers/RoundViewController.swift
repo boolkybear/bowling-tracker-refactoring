@@ -12,6 +12,8 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet var nextButton: UIButton!
     @IBOutlet var finishButton: UIButton!
 
+    var state: GameState?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,6 +23,10 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
 
     func reloadScreen() {
+        guard let state else {
+            return
+        }
+
         roundLabel.text = "Round".localized + " " + "\(state.game.currentRound)"
         tableView.reloadData()
         if state.game.isLastRound {
@@ -43,16 +49,25 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
 
     @IBAction @objc func goToNextRound() {
+        guard let state else {
+            return
+        }
+
         state.game.currentRound += 1
         reloadScreen()
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let state else {
+            return 0
+        }
+
         return state.friends.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendRoundScoreCell") as? FriendRoundScoreCell else {
+        guard let state,
+              let cell = tableView.dequeueReusableCell(withIdentifier: "FriendRoundScoreCell") as? FriendRoundScoreCell else {
             return UITableViewCell()
         }
         cell.nameLabel.text = state.friends[indexPath.row]
@@ -93,6 +108,10 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+
+        guard let state else {
+            return
+        }
 
         if state.game.scores.count < state.game.currentRound {
             if indexPath.row == 0 {

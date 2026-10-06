@@ -74,3 +74,13 @@ class FriendEntryViewController: UIViewController, UITableViewDataSource, UITabl
         changeLanguageButton.menu = menu
     }
 }
+
+extension FriendEntryViewController {
+    @IBSegueAction func initializeRoundViewController(coder: NSCoder) -> RoundViewController {
+        guard let viewController = RoundViewController(coder: coder) else {
+            fatalError("RoundViewController not initialized")
+        }
+        viewController.state = state
+        return viewController
+    }
+}
