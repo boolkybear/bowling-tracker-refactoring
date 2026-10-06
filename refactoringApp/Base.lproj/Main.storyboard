@@ -117,7 +117,7 @@
         <!--Round View Controller-->
         <scene sceneID="z6x-h3-vrI">
             <objects>
-                <viewController id="i1c-gc-fP3" customClass="RoundViewController" customModule="refactoringApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RoundViewController" id="i1c-gc-fP3" customClass="RoundViewController" customModule="refactoringApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DcO-ll-VXc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
