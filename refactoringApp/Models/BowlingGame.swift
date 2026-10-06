@@ -18,4 +18,8 @@ extension BowlingGame {
     var isLastRound: Bool {
         currentRound == 10
     }
+
+    func advanceRound() {
+        currentRound += 1
+    }
 }

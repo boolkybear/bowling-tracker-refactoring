@@ -53,7 +53,7 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
             return
         }
 
-        state.game.currentRound += 1
+        state.game.advanceRound()
         reloadScreen()
     }
 
