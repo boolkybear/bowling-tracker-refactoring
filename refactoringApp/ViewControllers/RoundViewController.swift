@@ -70,7 +70,7 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
                 cell.accessoryType = .none
             }
         } else {
-            let score = state.game.scores[state.game.currentRound - 1].friendsScores[indexPath.row]
+            let score = state.game.getCurrentRoundScoreForFriend(at: indexPath.row)
             if PendingScoreCalculator.isStrike(score) {
                 cell.scoreLabel.text = "10 + 2 next rolls".localized + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))".localized
             } else if PendingScoreCalculator.isSpare(score) {

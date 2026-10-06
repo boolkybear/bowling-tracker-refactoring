@@ -27,4 +27,8 @@ extension BowlingGame {
         currentRound += 1
         scores.append(RoundScore())
     }
+
+    func getCurrentRoundScoreForFriend(at index: Int) -> Score {
+        scores[currentRound - 1].friendsScores[index]
+    }
 }
