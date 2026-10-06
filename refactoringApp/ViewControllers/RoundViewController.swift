@@ -31,17 +31,13 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
         tableView.reloadData()
         if state.game.isLastRound {
             nextButton.isEnabled = false
-            if state.game.scores.count == state.game.currentRound,
-               state.game.scores[state.game.currentRound - 1].friendsScores.count == state.friends.count {
+            if state.game.isCurrentRoundScoreCreated,
+               state.isCurrentRoundFinishedForAllFriends {
                 finishButton.isEnabled = true
             }
         } else {
-            if state.game.scores.count == state.game.currentRound {
-                if state.game.scores[state.game.currentRound - 1].friendsScores.count == state.friends.count {
-                    nextButton.isEnabled = true
-                } else {
-                    nextButton.isEnabled = false
-                }
+            if state.game.isCurrentRoundScoreCreated {
+                nextButton.isEnabled = state.isCurrentRoundFinishedForAllFriends
             } else {
                 nextButton.isEnabled = false
             }
@@ -71,7 +67,7 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
             return UITableViewCell()
         }
         cell.nameLabel.text = state.friends[indexPath.row]
-        if state.game.scores.count < state.game.currentRound {
+        if !state.game.isCurrentRoundScoreCreated {
             cell.scoreLabel.text = "Pending".localized + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))".localized
             if indexPath.row == 0 {
                 cell.accessoryType = .disclosureIndicator
@@ -113,7 +109,7 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
             return
         }
 
-        if state.game.scores.count < state.game.currentRound {
+        if !state.game.isCurrentRoundScoreCreated {
             if indexPath.row == 0 {
                 let storyBoard = UIStoryboard(name: "Main", bundle: nil)
                 guard let vc = storyBoard.instantiateViewController(withIdentifier: "PinRollViewController") as? PinRollViewController else {

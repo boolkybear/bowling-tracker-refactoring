@@ -48,7 +48,7 @@ class PinRollViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         updateTranslations()
-        if state.game.scores.count == state.game.currentRound {
+        if state.game.isCurrentRoundScoreCreated {
             friendLabel.text = state.friends[state.game.scores[state.game.currentRound - 1].friendsScores.count]
         } else {
             friendLabel.text = state.friends[0]

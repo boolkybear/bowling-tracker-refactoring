@@ -19,6 +19,10 @@ extension BowlingGame {
         currentRound == 10
     }
 
+    var isCurrentRoundScoreCreated: Bool {
+        scores.count == currentRound
+    }
+
     func advanceRound() {
         currentRound += 1
     }
