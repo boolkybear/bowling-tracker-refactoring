@@ -13,3 +13,9 @@ class Score {
 class RoundScore {
     var friendsScores: [Score] = []
 }
+
+extension BowlingGame {
+    var isLastRound: Bool {
+        currentRound == 10
+    }
+}

@@ -97,7 +97,7 @@ class PinRollViewController: UIViewController {
         roll1StrikeButton.isEnabled = false
         roll1CompleteButton.isEnabled = false
         if total == 10 {
-            if state.game.currentRound == 10 {
+            if state.game.isLastRound {
                 roll2View.isHidden = false
                 roll2Label.text = ""
                 roll2StrikeButton.setTitle("Strike".localized, for: .normal)
@@ -123,7 +123,7 @@ class PinRollViewController: UIViewController {
         for pin in allSwitches {
             pin?.setOn(false, animated: true)
         }
-        if state.game.currentRound == 10 {
+        if state.game.isLastRound {
             if scores[0] == 10 {
                 roll2Label.text = "10".localized
             } else {
@@ -152,7 +152,7 @@ class PinRollViewController: UIViewController {
             }
         }
         var round = total
-        if state.game.currentRound == 10 {
+        if state.game.isLastRound {
             if scores[0] != 10 {
                 round -= scores[0]
             }
@@ -163,7 +163,7 @@ class PinRollViewController: UIViewController {
         roll2Label.text = "\(round)"
         roll2StrikeButton.isEnabled = false
         roll2CompleteButton.isEnabled = false
-        if state.game.currentRound == 10 {
+        if state.game.isLastRound {
             if scores[0] == 10 || scores[0] + scores[1] == 10 {
                 roll3View.isHidden = false
                 roll3Label.text = ""

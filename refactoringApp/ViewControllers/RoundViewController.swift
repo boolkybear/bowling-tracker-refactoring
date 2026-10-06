@@ -23,7 +23,7 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
     func reloadScreen() {
         roundLabel.text = "Round".localized + " " + "\(state.game.currentRound)"
         tableView.reloadData()
-        if state.game.currentRound == 10 {
+        if state.game.isLastRound {
             nextButton.isEnabled = false
             if state.game.scores.count == state.game.currentRound,
                state.game.scores[state.game.currentRound - 1].friendsScores.count == state.friends.count {
