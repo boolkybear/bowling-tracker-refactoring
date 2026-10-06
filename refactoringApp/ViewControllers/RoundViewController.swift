@@ -75,9 +75,9 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
                 cell.accessoryType = .none
             }
         } else {
-            if state.game.scores[state.game.currentRound - 1].friendsScores.count <= indexPath.row {
+            if state.currentFriendTurnIndex <= indexPath.row {
                 cell.scoreLabel.text = "Pending".localized + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))".localized
-                if indexPath.row == state.game.scores[state.game.currentRound - 1].friendsScores.count {
+                if indexPath.row == state.currentFriendTurnIndex {
                     cell.accessoryType = .disclosureIndicator
                 } else {
                     cell.accessoryType = .none
@@ -118,7 +118,7 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
                 return
             }
         } else {
-            if indexPath.row == state.game.scores[state.game.currentRound - 1].friendsScores.count {
+            if indexPath.row == state.currentFriendTurnIndex {
                 let storyBoard = UIStoryboard(name: "Main", bundle: nil)
                 guard let vc = storyBoard.instantiateViewController(withIdentifier: "PinRollViewController") as? PinRollViewController else {
                     return
