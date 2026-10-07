@@ -31,4 +31,9 @@ extension BowlingGame {
     func getCurrentRoundScoreForFriend(at index: Int) -> Score {
         scores[currentRound - 1].friendsScores[index]
     }
+
+    func reset() {
+        currentRound = 1
+        scores = [RoundScore()]
+    }
 }

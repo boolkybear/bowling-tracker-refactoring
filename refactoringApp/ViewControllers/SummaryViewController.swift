@@ -56,8 +56,7 @@ class SummaryViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         let parentViewController = presentingViewController?.presentingViewController ?? presentingViewController ?? self
         parentViewController.dismiss(animated: true) {
-            state.game.currentRound = 1
-            state.game.scores = [RoundScore()]
+            state.game.reset()
         }
     }
 
