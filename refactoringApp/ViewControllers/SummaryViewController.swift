@@ -20,36 +20,8 @@ class SummaryViewController: UIViewController, UITableViewDataSource, UITableVie
 
         updateTranslations()
 
-        var scores: [Int] = []
-        var index = 0
-        for _ in state.friends.enumerated() {
-            var total = 0
-            for round in (0..<10) {
-                if round == 9 {
-                    let score = state.game.scores[round].friendsScores[index]
-                    let sum = score.scores.reduce(0, +)
-                    total += sum
-                } else {
-                    let score = state.game.scores[round].friendsScores[index]
-                    var sum = score.scores.reduce(0, +)
-                    if sum == 10 {
-                        var nextRolls: [Int] = []
-                        let nextRound = round + 1
-                        for next in (nextRound..<10) {
-                            nextRolls.append(contentsOf: state.game.scores[next].friendsScores[index].scores)
-                        }
-                        sum += nextRolls[0]
-                        if score.scores.count == 1 {
-                            sum += nextRolls[1]
-                        }
-                        total += sum
-                    } else {
-                        total += sum
-                    }
-                }
-            }
-            scores.append(total)
-            index += 1
+        let scores = state.friends.enumerated().map { (index, _) in
+            return PendingScoreCalculator.calculateScore(game: state.game, friend: index)
         }
         let pairs = zip(state.friends, scores)
         sortedScores = pairs.sorted(by: { return $0.1 < $1.1 }).reversed()
