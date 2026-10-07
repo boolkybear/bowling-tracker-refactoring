@@ -81,6 +81,7 @@ extension FriendEntryViewController {
             fatalError("RoundViewController not initialized")
         }
         viewController.state = state
+        viewController.scoreCalculator = DefaultPendingScoreCalculator()
         return viewController
     }
 }

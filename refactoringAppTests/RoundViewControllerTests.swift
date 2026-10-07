@@ -21,6 +21,7 @@ struct RoundViewControllerTests {
         self.sut = sut
         state = DefaultGameState()
         sut.state = state
+        sut.scoreCalculator = DefaultPendingScoreCalculator()
         state.friends = ["Test"]
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
             throw CustomError.invalidWindowScene

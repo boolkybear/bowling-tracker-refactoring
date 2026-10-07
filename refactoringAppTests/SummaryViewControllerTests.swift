@@ -32,6 +32,7 @@ struct SummaryViewControllerTests {
         emptyRoundScore.friendsScores = [emptyScore, emptyScore]
         state.game.scores = [emptyRoundScore, emptyRoundScore, emptyRoundScore, emptyRoundScore, emptyRoundScore, emptyRoundScore, emptyRoundScore, emptyRoundScore, emptyRoundScore, finalRoundScore]
         sut.state = state
+        sut.scoreCalculator = DefaultPendingScoreCalculator()
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else  {
             throw CustomError.invalidWindowScene
         }

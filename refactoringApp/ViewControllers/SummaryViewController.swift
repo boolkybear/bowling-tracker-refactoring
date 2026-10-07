@@ -10,18 +10,20 @@ class SummaryViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet var playAgainButton: UIButton!
 
     var state: GameState?
+    var scoreCalculator: PendingScoreCalculator?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        guard let state else {
+        guard let state,
+              let scoreCalculator else {
             return
         }
 
         updateTranslations()
 
         let scores = state.friends.enumerated().map { (index, _) in
-            return PendingScoreCalculator().calculateScore(game: state.game, friend: index)
+            return scoreCalculator.calculateScore(game: state.game, friend: index)
         }
         let pairs = zip(state.friends, scores)
         sortedScores = pairs.sorted(by: { return $0.1 < $1.1 }).reversed()

@@ -13,6 +13,7 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet var finishButton: UIButton!
 
     var state: GameState?
+    var scoreCalculator: PendingScoreCalculator?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,12 +59,13 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let state,
+              let scoreCalculator,
               let cell = tableView.dequeueReusableCell(withIdentifier: "FriendRoundScoreCell") as? FriendRoundScoreCell else {
             return UITableViewCell()
         }
         cell.nameLabel.text = state.friends[indexPath.row]
         if state.currentFriendTurnIndex <= indexPath.row {
-            cell.scoreLabel.text = "Pending".localized + " " + "(\(PendingScoreCalculator().calculateScore(game: state.game, friend: indexPath.row)))".localized
+            cell.scoreLabel.text = "Pending".localized + " " + "(\(scoreCalculator.calculateScore(game: state.game, friend: indexPath.row)))".localized
             if indexPath.row == state.currentFriendTurnIndex {
                 cell.accessoryType = .disclosureIndicator
             } else {
@@ -71,13 +73,13 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
             }
         } else {
             let score = state.game.getCurrentRoundScoreForFriend(at: indexPath.row)
-            if PendingScoreCalculator().isStrike(score) {
-                cell.scoreLabel.text = "10 + 2 next rolls".localized + " " + "(\(PendingScoreCalculator().calculateScore(game: state.game, friend: indexPath.row)))".localized
-            } else if PendingScoreCalculator().isSpare(score) {
-                cell.scoreLabel.text = "10 + next roll".localized + " " + "(\(PendingScoreCalculator().calculateScore(game: state.game, friend: indexPath.row)))".localized
+            if scoreCalculator.isStrike(score) {
+                cell.scoreLabel.text = "10 + 2 next rolls".localized + " " + "(\(scoreCalculator.calculateScore(game: state.game, friend: indexPath.row)))".localized
+            } else if scoreCalculator.isSpare(score) {
+                cell.scoreLabel.text = "10 + next roll".localized + " " + "(\(scoreCalculator.calculateScore(game: state.game, friend: indexPath.row)))".localized
             } else {
-                let sum = PendingScoreCalculator().getScoreSum(score)
-                cell.scoreLabel.text = "\(sum)" + " " + "(\(PendingScoreCalculator().calculateScore(game: state.game, friend: indexPath.row)))".localized
+                let sum = scoreCalculator.getScoreSum(score)
+                cell.scoreLabel.text = "\(sum)" + " " + "(\(scoreCalculator.calculateScore(game: state.game, friend: indexPath.row)))".localized
             }
             cell.accessoryType = .checkmark
         }
@@ -119,6 +121,7 @@ extension RoundViewController {
             fatalError("SummaryViewController not initialized")
         }
         viewController.state = state
+        viewController.scoreCalculator = DefaultPendingScoreCalculator()
         return viewController
     }
 }

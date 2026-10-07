@@ -3,7 +3,14 @@
 //  refactoringApp
 //
 
-class PendingScoreCalculator {
+protocol PendingScoreCalculator {
+    func calculateScore(game: BowlingGame, friend: Int) -> Int
+    func getScoreSum(_ score: Score) -> Int
+    func isStrike(_ score: Score) -> Bool
+    func isSpare(_ score: Score) -> Bool
+}
+
+class DefaultPendingScoreCalculator: PendingScoreCalculator {
     func calculateScore(game: BowlingGame, friend: Int) -> Int {
         var friendScores = game.scores.map { round in
             if friend < round.friendsScores.count {

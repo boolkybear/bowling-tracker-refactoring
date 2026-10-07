@@ -13,7 +13,7 @@ struct PendingScoreCalculatorTests {
     @MainActor
     @Test func when_scoreIsEmpty_then_sumShouldBeZero() {
         let score = Score()
-        let sum = PendingScoreCalculator().getScoreSum(score)
+        let sum = DefaultPendingScoreCalculator().getScoreSum(score)
         #expect(sum == 0)
     }
 
@@ -21,49 +21,49 @@ struct PendingScoreCalculatorTests {
     @Test func when_scoreIsNotEmpty_then_sumShouldBeTheSumOfScores() {
         let score = Score()
         score.scores = [10, 20, 30]
-        let sum = PendingScoreCalculator().getScoreSum(score)
+        let sum = DefaultPendingScoreCalculator().getScoreSum(score)
         #expect(sum == 60)
     }
 
     @Test func when_scoreHasOneRollAndIs10_then_itShouldBeStrike() {
         let score = Score()
         score.scores = [10]
-        let isStrike = PendingScoreCalculator().isStrike(score)
+        let isStrike = DefaultPendingScoreCalculator().isStrike(score)
         #expect(isStrike)
     }
 
     @Test func when_scoreHasOneRollAndIsNot10_then_itShouldNotBeStrike() {
         let score = Score()
         score.scores = [8]
-        let isStrike = PendingScoreCalculator().isStrike(score)
+        let isStrike = DefaultPendingScoreCalculator().isStrike(score)
         #expect(!isStrike)
     }
 
     @Test func when_scoreHasMoreThanOneRollAndIs10_then_itShouldNotBeStrike() {
         let score = Score()
         score.scores = [8, 2]
-        let isStrike = PendingScoreCalculator().isStrike(score)
+        let isStrike = DefaultPendingScoreCalculator().isStrike(score)
         #expect(!isStrike)
     }
 
     @Test func when_scoreHasTwoRollsAndIs10_then_itShouldBeSpare() {
         let score = Score()
         score.scores = [8, 2]
-        let isSpare = PendingScoreCalculator().isSpare(score)
+        let isSpare = DefaultPendingScoreCalculator().isSpare(score)
         #expect(isSpare)
     }
 
     @Test func when_scoreHasTwoRollsAndIsNot10_then_itShouldNotBeSpare() {
         let score = Score()
         score.scores = [1, 2]
-        let isSpare = PendingScoreCalculator().isSpare(score)
+        let isSpare = DefaultPendingScoreCalculator().isSpare(score)
         #expect(!isSpare)
     }
 
     @Test func when_scoreHasOneRollAndIs10_then_itShouldNotBeSpare() {
         let score = Score()
         score.scores = [10]
-        let isSpare = PendingScoreCalculator().isSpare(score)
+        let isSpare = DefaultPendingScoreCalculator().isSpare(score)
         #expect(!isSpare)
     }
 
@@ -79,7 +79,7 @@ struct PendingScoreCalculatorTests {
         let game = BowlingGame()
         game.currentRound = 3
         game.scores = [emptyRoundScore, pointsRoundScore, RoundScore()]
-        let score = PendingScoreCalculator().calculateScore(game: game, friend: 0)
+        let score = DefaultPendingScoreCalculator().calculateScore(game: game, friend: 0)
         #expect(score == 1)
     }
 
@@ -95,7 +95,7 @@ struct PendingScoreCalculatorTests {
         let game = BowlingGame()
         game.currentRound = 2
         game.scores = [emptyRoundScore, pointsRoundScore]
-        let score = PendingScoreCalculator().calculateScore(game: game, friend: 0)
+        let score = DefaultPendingScoreCalculator().calculateScore(game: game, friend: 0)
         #expect(score == 10)
     }
 
@@ -111,7 +111,7 @@ struct PendingScoreCalculatorTests {
         let game = BowlingGame()
         game.currentRound = 2
         game.scores = [emptyRoundScore, pointsRoundScore]
-        let score = PendingScoreCalculator().calculateScore(game: game, friend: 0)
+        let score = DefaultPendingScoreCalculator().calculateScore(game: game, friend: 0)
         #expect(score == 10)
     }
 
@@ -127,7 +127,7 @@ struct PendingScoreCalculatorTests {
         let game = BowlingGame()
         game.currentRound = 2
         game.scores = [strikeRoundScore, pointsRoundScore]
-        let score = PendingScoreCalculator().calculateScore(game: game, friend: 0)
+        let score = DefaultPendingScoreCalculator().calculateScore(game: game, friend: 0)
         #expect(score == 12 + 2)
     }
 
@@ -143,7 +143,7 @@ struct PendingScoreCalculatorTests {
         let game = BowlingGame()
         game.currentRound = 2
         game.scores = [spareRoundScore, pointsRoundScore]
-        let score = PendingScoreCalculator().calculateScore(game: game, friend: 0)
+        let score = DefaultPendingScoreCalculator().calculateScore(game: game, friend: 0)
         #expect(score == 11 + 2)
     }
 
@@ -159,7 +159,7 @@ struct PendingScoreCalculatorTests {
         let game = BowlingGame()
         game.currentRound = 10
         game.scores = [emptyRoundScore, emptyRoundScore, emptyRoundScore, emptyRoundScore, emptyRoundScore, emptyRoundScore, emptyRoundScore, emptyRoundScore, emptyRoundScore, pointsRoundScore]
-        let score = PendingScoreCalculator().calculateScore(game: game, friend: 0)
+        let score = DefaultPendingScoreCalculator().calculateScore(game: game, friend: 0)
         #expect(score == 20)
     }
 }
