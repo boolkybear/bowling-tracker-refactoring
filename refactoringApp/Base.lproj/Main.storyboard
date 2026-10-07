@@ -178,7 +178,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Finish game"/>
                                 <connections>
-                                    <segue destination="Z2Q-Ue-vbI" kind="presentation" modalPresentationStyle="fullScreen" id="jyX-8i-N5N"/>
+                                    <segue destination="Z2Q-Ue-vbI" kind="presentation" destinationCreationSelector="initializeSummaryViewControllerWithCoder:" modalPresentationStyle="fullScreen" id="jyX-8i-N5N"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="grB-KE-kIE">
@@ -234,7 +234,7 @@
         <!--Summary View Controller-->
         <scene sceneID="1UP-S7-3aE">
             <objects>
-                <viewController id="Z2Q-Ue-vbI" customClass="SummaryViewController" customModule="refactoringApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SummaryViewController" id="Z2Q-Ue-vbI" customClass="SummaryViewController" customModule="refactoringApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="O0j-SW-k2W">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -667,7 +667,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.53333333333333333" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.53333333329999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

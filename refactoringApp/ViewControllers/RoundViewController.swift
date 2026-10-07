@@ -112,3 +112,13 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
 }
 
 extension RoundViewController: ScreenReloadable {}
+
+extension RoundViewController {
+    @IBSegueAction func initializeSummaryViewController(coder: NSCoder) -> SummaryViewController {
+        guard let viewController = SummaryViewController(coder: coder) else {
+            fatalError("SummaryViewController not initialized")
+        }
+        viewController.state = state
+        return viewController
+    }
+}

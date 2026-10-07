@@ -9,14 +9,20 @@ class SummaryViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet var tableView: UITableView!
     @IBOutlet var playAgainButton: UIButton!
 
+    var state: GameState?
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        guard let state else {
+            return
+        }
 
         updateTranslations()
 
         var scores: [Int] = []
         var index = 0
-        for _ in state.friends {
+        for _ in state.friends.enumerated() {
             var total = 0
             for round in (0..<10) {
                 if round == 9 {
@@ -71,10 +77,13 @@ class SummaryViewController: UIViewController, UITableViewDataSource, UITableVie
     }
 
     @IBAction @objc func returnToFriendList() {
+        guard let state else {
+            return
+        }
         let parentViewController = presentingViewController?.presentingViewController ?? presentingViewController ?? self
         parentViewController.dismiss(animated: true) {
             state.game.currentRound = 1
-            state.game.scores = []
+            state.game.scores = [RoundScore()]
         }
     }
 
