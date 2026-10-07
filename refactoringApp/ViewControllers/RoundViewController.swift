@@ -63,7 +63,7 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
         cell.nameLabel.text = state.friends[indexPath.row]
         if state.currentFriendTurnIndex <= indexPath.row {
-            cell.scoreLabel.text = "Pending".localized + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))".localized
+            cell.scoreLabel.text = "Pending".localized + " " + "(\(PendingScoreCalculator.calculateScore(game: state.game, friend: indexPath.row)))".localized
             if indexPath.row == state.currentFriendTurnIndex {
                 cell.accessoryType = .disclosureIndicator
             } else {
@@ -72,12 +72,12 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
         } else {
             let score = state.game.getCurrentRoundScoreForFriend(at: indexPath.row)
             if PendingScoreCalculator.isStrike(score) {
-                cell.scoreLabel.text = "10 + 2 next rolls".localized + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))".localized
+                cell.scoreLabel.text = "10 + 2 next rolls".localized + " " + "(\(PendingScoreCalculator.calculateScore(game: state.game, friend: indexPath.row)))".localized
             } else if PendingScoreCalculator.isSpare(score) {
-                cell.scoreLabel.text = "10 + next roll".localized + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))".localized
+                cell.scoreLabel.text = "10 + next roll".localized + " " + "(\(PendingScoreCalculator.calculateScore(game: state.game, friend: indexPath.row)))".localized
             } else {
                 let sum = PendingScoreCalculator.getScoreSum(score)
-                cell.scoreLabel.text = "\(sum)" + " " + "(\(PendingScoreCalculator.calculateScore(friend: indexPath.row)))".localized
+                cell.scoreLabel.text = "\(sum)" + " " + "(\(PendingScoreCalculator.calculateScore(game: state.game, friend: indexPath.row)))".localized
             }
             cell.accessoryType = .checkmark
         }
