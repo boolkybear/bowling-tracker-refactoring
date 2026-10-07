@@ -21,7 +21,7 @@ class SummaryViewController: UIViewController, UITableViewDataSource, UITableVie
         updateTranslations()
 
         let scores = state.friends.enumerated().map { (index, _) in
-            return PendingScoreCalculator.calculateScore(game: state.game, friend: index)
+            return PendingScoreCalculator().calculateScore(game: state.game, friend: index)
         }
         let pairs = zip(state.friends, scores)
         sortedScores = pairs.sorted(by: { return $0.1 < $1.1 }).reversed()

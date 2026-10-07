@@ -4,7 +4,7 @@
 //
 
 class PendingScoreCalculator {
-    static func calculateScore(game: BowlingGame, friend: Int) -> Int {
+    func calculateScore(game: BowlingGame, friend: Int) -> Int {
         var friendScores = game.scores.map { round in
             if friend < round.friendsScores.count {
                 return round.friendsScores[friend]
@@ -39,16 +39,16 @@ class PendingScoreCalculator {
         return total
     }
 
-    static func getScoreSum(_ score: Score) -> Int {
+    func getScoreSum(_ score: Score) -> Int {
         return score.scores.reduce(0, +)
     }
 
-    static func isStrike(_ score: Score) -> Bool {
+    func isStrike(_ score: Score) -> Bool {
         let isStrike = score.scores.count == 1 && score.scores[0] == 10
         return isStrike
     }
 
-    static func isSpare(_ score: Score) -> Bool {
+    func isSpare(_ score: Score) -> Bool {
         let isSpare = score.scores.count == 2 && score.scores[0] + score.scores[1] == 10
         return isSpare
     }
