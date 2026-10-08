@@ -6,6 +6,7 @@
 import UIKit
 
 var state: GameState = DefaultGameState()
+var persistence: Persistence = UserDefaults.standard
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {

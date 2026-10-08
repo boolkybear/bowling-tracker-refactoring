@@ -56,18 +56,18 @@ class FriendEntryViewController: UIViewController, UITableViewDataSource, UITabl
         startButton.setTitle("Start game".localized, for: .normal)
         titleLabel.text = "Add up to 10 friends to this game".localized
 
-        var language = UserDefaults.standard.string(forKey: "appLanguage") ?? "en"
+        var language = persistence.string(forKey: "appLanguage") ?? "en"
         let validLanguages = ["es", "en"]
         if !validLanguages.contains(language) {
             language = "en"
         }
         let menu = UIMenu(title: "Change language".localized, options: [.singleSelection], children: [
             UIAction(title: "English".localized, state: language == "en" ? .on : .off) { [weak self] _ in
-                UserDefaults.standard.setValue("en", forKey: "appLanguage")
+                persistence.setValue("en", forKey: "appLanguage")
                 self?.updateTranslations()
             },
             UIAction(title: "Spanish".localized, state: language == "es" ? .on : .off) { [weak self] _ in
-                UserDefaults.standard.setValue("es", forKey: "appLanguage")
+                persistence.setValue("es", forKey: "appLanguage")
                 self?.updateTranslations()
             }
         ])

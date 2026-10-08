@@ -25,7 +25,7 @@ extension String {
     }
 
     var localized: String {
-        var language = UserDefaults.standard.string(forKey: "appLanguage") ?? "en"
+        var language = persistence.string(forKey: "appLanguage") ?? "en"
         let validLanguages = ["es", "en"]
         if !validLanguages.contains(language) {
             language = "en"
