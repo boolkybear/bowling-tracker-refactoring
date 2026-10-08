@@ -48,11 +48,7 @@ class PinRollViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         updateTranslations()
-        if state.game.isCurrentRoundScoreCreated {
-            friendLabel.text = state.friends[state.game.scores[state.game.currentRound - 1].friendsScores.count]
-        } else {
-            friendLabel.text = state.friends[0]
-        }
+        friendLabel.text = state.friends[state.currentFriendTurnIndex]
         roll1Label.text = ""
         roll2View.isHidden = true
         roll3View.isHidden = true

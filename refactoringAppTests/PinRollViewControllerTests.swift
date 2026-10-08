@@ -159,7 +159,7 @@ struct PinRollViewControllerTests {
     @MainActor
     @Test func when_complete2IsCalledAndIsLastRoundAndRoll2IsStrike_then_roll3ViewsShouldBeVisible() throws {
         state.game.currentRound = 10
-        state.game.scores = [RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore()]
+        state.game.scores = [RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore()]
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = sut
         window.makeKeyAndVisible()
@@ -177,7 +177,7 @@ struct PinRollViewControllerTests {
     @MainActor
     @Test func when_complete2IsCalledAndIsLastRoundAndRoll1IsSpare_then_roll3ViewsShouldBeVisible() throws {
         state.game.currentRound = 10
-        state.game.scores = [RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore()]
+        state.game.scores = [RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore()]
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = sut
         window.makeKeyAndVisible()
@@ -195,7 +195,7 @@ struct PinRollViewControllerTests {
     @MainActor
     @Test func when_complete2IsCalledAndIsLastRoundAndRoll1IsNotStrikeNorSpare_then_roll3ViewsShouldBeVisible() throws {
         state.game.currentRound = 10
-        state.game.scores = [RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore()]
+        state.game.scores = [RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore()]
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = sut
         window.makeKeyAndVisible()
@@ -228,7 +228,7 @@ struct PinRollViewControllerTests {
     @MainActor
     @Test func when_complete3IsCalled_then_finishFrameButtonShouldBeEnabled() throws {
         state.game.currentRound = 10
-        state.game.scores = [RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore()]
+        state.game.scores = [RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore(), RoundScore()]
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = sut
         window.makeKeyAndVisible()
