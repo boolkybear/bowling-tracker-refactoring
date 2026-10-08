@@ -33,19 +33,15 @@ class SummaryViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sortedScores.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendScoreCell") as? FriendScoreCell else {
             return UITableViewCell()
         }
 
-        let colors: [UIColor] = [.green, .yellow, .orange, .red, .red, .red, .red, .red, .red, .red]
-
-        cell.positionLabel.text = "\(indexPath.row + 1)"
-        cell.nameLabel.text = sortedScores[indexPath.row].0
-        cell.scoreLabel.text = "\(sortedScores[indexPath.row].1)"
-        cell.backgroundColorView.backgroundColor = colors[indexPath.row]
-        cell.contentView.backgroundColor = colors[indexPath.row].withAlphaComponent(0.2)
+        let name = sortedScores[indexPath.row].0
+        let score = sortedScores[indexPath.row].1
+        cell.setCellContent(at: indexPath.row, name: name, score: score)
 
         return cell
     }

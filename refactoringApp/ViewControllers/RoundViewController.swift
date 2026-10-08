@@ -56,54 +56,32 @@ class RoundViewController: UIViewController, UITableViewDataSource, UITableViewD
 
         return state.friends.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let state,
               let scoreCalculator,
               let cell = tableView.dequeueReusableCell(withIdentifier: "FriendRoundScoreCell") as? FriendRoundScoreCell else {
             return UITableViewCell()
         }
-        cell.nameLabel.text = state.friends[indexPath.row]
-        if state.currentFriendTurnIndex <= indexPath.row {
-            cell.scoreLabel.text = "Pending".localized + " " + "(\(scoreCalculator.calculateScore(game: state.game, friend: indexPath.row)))".localized
-            if indexPath.row == state.currentFriendTurnIndex {
-                cell.accessoryType = .disclosureIndicator
-            } else {
-                cell.accessoryType = .none
-            }
-        } else {
-            let score = state.game.getCurrentRoundScoreForFriend(at: indexPath.row)
-            if scoreCalculator.isStrike(score) {
-                cell.scoreLabel.text = "10 + 2 next rolls".localized + " " + "(\(scoreCalculator.calculateScore(game: state.game, friend: indexPath.row)))".localized
-            } else if scoreCalculator.isSpare(score) {
-                cell.scoreLabel.text = "10 + next roll".localized + " " + "(\(scoreCalculator.calculateScore(game: state.game, friend: indexPath.row)))".localized
-            } else {
-                let sum = scoreCalculator.getScoreSum(score)
-                cell.scoreLabel.text = "\(sum)" + " " + "(\(scoreCalculator.calculateScore(game: state.game, friend: indexPath.row)))".localized
-            }
-            cell.accessoryType = .checkmark
-        }
+        cell.setCellContent(at: indexPath.row, state: state, scoreCalculator: scoreCalculator)
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        guard let state else {
+        guard let state,
+              indexPath.row == state.currentFriendTurnIndex else {
             return
         }
 
-        if indexPath.row == state.currentFriendTurnIndex {
-            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-            guard let vc = storyBoard.instantiateViewController(withIdentifier: "PinRollViewController") as? PinRollViewController else {
-                return
-            }
-            vc.previousViewController = self
-            vc.state = state
-            present(vc, animated: true)
-        } else {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        guard let vc = storyBoard.instantiateViewController(withIdentifier: "PinRollViewController") as? PinRollViewController else {
             return
         }
+        vc.previousViewController = self
+        vc.state = state
+        present(vc, animated: true)
     }
 
     func updateTranslations() {

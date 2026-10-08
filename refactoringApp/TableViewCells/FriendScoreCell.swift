@@ -24,3 +24,15 @@ class FriendScoreCell: UITableViewCell {
     }
 
 }
+
+extension FriendScoreCell {
+    func setCellContent(at index: Int, name: String, score: Int) {
+        let colors: [UIColor] = [.green, .yellow, .orange, .red, .red, .red, .red, .red, .red, .red]
+
+        positionLabel.text = "\(index + 1)"
+        nameLabel.text = name
+        scoreLabel.text = "\(score)"
+        backgroundColorView.backgroundColor = colors[index]
+        contentView.backgroundColor = colors[index].withAlphaComponent(0.2)
+    }
+}
